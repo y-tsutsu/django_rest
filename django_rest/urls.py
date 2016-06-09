@@ -4,7 +4,10 @@ Definition of urls for django_rest.
 
 from datetime import datetime
 from django.conf.urls import url
+from django.views.generic import RedirectView
 import django.contrib.auth.views
+
+from app.urls import router
 
 # Uncomment the next lines to enable the admin:
 from django.conf.urls import include
@@ -12,6 +15,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = [
+    url(r'^$', RedirectView.as_view(url='api/')),
+    url(r'^api/', include(router.urls)),
     #url(r'^login/$',
     #    django.contrib.auth.views.login,
     #    {
